@@ -1,7 +1,7 @@
 // Course:  CS213 - Programming II  - 2018
 // Title:   Assignment II - Task 2 - Problem 2
 // Program: CS213-2018-A2-T2-P2
-// Purpose: Apply basic arithmetic operations on Matrices
+// Purpose: Creating a class Pet with 3 subclasses and printing their descriptions
 // Author1: Mostafa Omar Mahmoud - 20170292
 // Date:    25 October 2018
 // Version: 1.0
