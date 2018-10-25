@@ -34,10 +34,8 @@ Matrix::Matrix(const Matrix &mat)
 	}
 }
 
-Matrix Matrix::operator=(const Matrix mat)
+Matrix Matrix::operator=(const Matrix &mat)
 {
-	assert((this->row == mat.row) && (this->col == mat.col));
-
 	// deallocation of matrix
 	for (int i = 0; i < this->row; ++i)
 	{
@@ -52,7 +50,13 @@ Matrix Matrix::operator=(const Matrix mat)
 	this->col = mat.col;
 	this->data = new int* [mat.row];
 	for (int i = 0; i < mat.row; ++i)
+	{
 		this->data[i] = new int[mat.col];
+		for (int j = 0; j < mat.col; ++j)
+		{
+			this->data[i][j] = mat.data[i][j];
+		}
+	}
 
 	return *this;
 }
@@ -74,13 +78,13 @@ void Matrix::setCell(int i, int j, int val)
 	this->data[i][j] = val;
 }
 
-ostream& operator<< (ostream& out, Matrix &mat)
+ostream& operator<< (ostream& out, const Matrix &mat)
 {
 	for (int i = 0; i < mat.row; ++i)
 	{
 		for (int j = 0; j < mat.col; ++j)
 		{
-			out << mat.getCell(i, j) << ' ';
+			out << mat.data[i][j] << ' ';
 		}
 		out << '\n';
 	}
@@ -99,6 +103,111 @@ istream& operator>> (istream& in, Matrix &mat)
 		}
 	}
 	return in;
+}
+
+Matrix Matrix::operator+(Matrix mat)
+{
+	assert(this->row == mat.row && this->col == mat.col);
+	Matrix resultMat(this->row, this->col);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+		{
+			resultMat.setCell(i, j,  this->getCell(i, j) + mat.getCell(i, j));
+		}
+	}
+	return resultMat;
+}
+
+Matrix Matrix::operator-(Matrix mat)
+{
+	assert(this->row == mat.row && this->col == mat.col);
+	Matrix resultMat(this->row, this->col);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+		{
+			resultMat.setCell(i, j,  this->getCell(i, j) - mat.getCell(i, j));
+		}
+	}
+	return resultMat;
+
+}
+
+Matrix Matrix::operator*(Matrix mat)
+{
+	assert(this->col == mat.row);
+	Matrix resultMat(this->row, mat.col);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < mat.col; ++j)
+		{
+			for (int k = 0; k < this->col; ++k)
+			{
+				if (k == 0)
+					resultMat.setCell(i, j, this->data[i][k] * mat.data[k][j]);
+				else
+					resultMat.setCell(i, j,  resultMat.getCell(i, j) + this->data[i][k] * mat.data[k][j]);
+			}
+		}
+	}
+	return resultMat;
+
+}
+
+Matrix Matrix::operator+(int scalar)
+{
+	Matrix resultMat(*this);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+			resultMat.data[i][j] += scalar;
+	}
+	return resultMat;
+}
+
+Matrix Matrix::operator-(int scalar)
+{
+	Matrix resultMat(*this);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+			resultMat.data[i][j] -= scalar;
+	}
+	return resultMat;
+}
+
+
+Matrix Matrix::operator*(int scalar)
+{
+	Matrix resultMat(*this);
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+			resultMat.data[i][j] *= scalar;
+	}
+	return resultMat;
+}
+
+
+bool Matrix::operator==(Matrix &mat)
+{
+	if (this->row != mat.row || this->col != mat.col)
+		return false;
+	for (int i = 0; i < this->row; ++i)
+	{
+		for (int j = 0; j < this->col; ++j)
+		{
+			if (this->data[i][j] != mat.data[i][j])
+				return false;
+		}
+	}
+	return true;
+}
+
+bool Matrix::operator!=(Matrix &mat)
+{
+	return !(*this == mat);
 }
 
 Matrix::~Matrix()

@@ -19,6 +19,8 @@
  * Questions:
  * why didn't cin and cout work without taking matrix by reference?
  * Is taking matrix by value slow? Doesn't it only contain  a pointer? or array of pointers?
+ * Copy constructor: When const can't use getCell, when not const and using getCell cant do mat3 = mat1 + mat2
+ * 	How am I using mat private data members here lol. Also must use const in cout << mat1 + mat2
  */
 
 #ifndef _MATRIX_H
@@ -61,11 +63,9 @@ public:
 	 * Usage: mat1 = mat2;
 	 * -------------------------
 	 * Makes a deep copy of mat2 in mat1
-	 * Returns a new matrix with the contents of mat2
-	 * -------------------------
-	 * Aborts if (mat1.row != mat2.row || mat1.col != mat2.col)
+	 * Returns mat1
 	 */
-	Matrix operator=(const Matrix mat);
+	Matrix operator=(const Matrix &mat);
 
 	/*
 	 * Method getCell
@@ -157,7 +157,7 @@ public:
 	 * ------------------------
 	 * Returns boolean true if mat1 is equal to mat2;
 	 */
-	Matrix operator== (Matrix &mat);
+	bool operator== (Matrix &mat);
 
 	/*
 	 * Operator ==
@@ -165,7 +165,7 @@ public:
 	 * ------------------------
 	 * Returns boolean true if mat1 is equal to mat2;
 	 */
-	Matrix operator!= (Matrix &mat);
+	bool operator!= (Matrix &mat);
 
 	/*
 	 * Method : checkDimensions
@@ -175,7 +175,7 @@ public:
 	 */
 	bool checkDimensions(int i, int j);
 
-	friend ostream& operator<< (ostream& out, Matrix &mat);
+	friend ostream& operator<< (ostream& out, const Matrix &mat);
 	friend istream& operator>> (istream& in, Matrix &mat);
 
 	/*
