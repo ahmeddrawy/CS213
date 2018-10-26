@@ -7,9 +7,10 @@
 // Date:    26 October 2018
 // Version: 1.0
 /// the implementation of class functions file
-/// having problems with the + operator
+/// having problems with the fixed the + operator for the postive numbers adding
 /// finished the setters and getters and paramterized constructors
-/// commit in 26/10/18 9:00AM  by HANAFY
+/// commit in 26/10/18 12PM  by HANAFY
+/// v1.1
 
 
 #include "bigINT.h"
@@ -73,20 +74,53 @@ void bigINT::setBig_INT(int mstring){
 void bigINT::setBig_INT(double mstring){
     this->mstring = mstring;
 }
-bigINT bigINT :: operator+(bigINT obj){ /// straighforward + operator without keep tracking of the carry but it doesn't work
+bigINT bigINT :: operator+(bigINT obj){ ///positive adding
 
-    bigINT retINT (this->mstring);
-    string temp1 = retINT.mstring;
+//    bigINT retINT (this->mstring);
+    string temp1 = this->mstring;
     string temp2 = obj.mstring;
-//    string ret ;
-    temp1.resize(max(temp1.size() , temp2.size()) +1);
+
+
+
     reverse(temp1.begin() ,temp1.end() );
     reverse(temp2.begin() ,temp2.end() );
-    for(int i = 0 ; i<(int)(temp1.size()); ++i){
-        temp1[i] +=temp2[i];
+    if(temp1.size()<temp2.size())               /// make temp1 is the larger one to make it possible after reversing adding the remaining numbers
+                                                ///e.q : 10000 , 23
+                                                ///     0001 , 32 so we can add the 1
+        swap(temp1,temp2);
+    int mnsz = min(temp1.size() ,temp2.size());
+    int mxsz = max(temp1.size() , temp2.size());
+
+
+    int carry = 0;                          /// keep track of the remainder and add it to the sum each iteration
+    int i ;
+    string ans ;
+    for( i = 0 ; i<(int)(mnsz); ++i){                           /// iterating to the min size of the 2 string to  add the common digits
+                                                                /// like 23 and 1000 adding 2 3 to 0 0
+            int sum  = temp1[i]-'0' + temp2[i]-'0'+ carry;      /// adding remainder to sum so if we have 8 + 5
+                                                                /// and the remainder is 1 then the sum is 13 +1
+                                                                /// we add the sum%10 to the digit place and carry =  sum/10
+            carry = sum/10;
+
+        ans+= sum%10 +'0';
     }
-    reverse(temp1.begin() , temp1.end());
-    cout<<temp1<<endl;
+
+    for(int j = i ; j<int(mxsz) ; ++j){                 ///iterating on the remaining part of the larger string to add the rest
+                                                        /// also we still keep tracking of remainder
+
+        int sum = temp1[j]+carry -'0';
+        carry = sum/10;
+        ans+=sum%10+'0';
+
+    }
+
+    if(carry)                               /// we can't have more than one extra space for the carry because the maximum carry is 9
+        ans += carry +'0';
+
+
+    reverse(ans.begin() , ans.end());
+
+     bigINT retINT (ans);
     return (retINT);
 }
 ostream& operator <<(ostream &out ,const  bigINT &obj){

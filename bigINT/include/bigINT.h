@@ -7,9 +7,11 @@
 // Date:    26 October 2018
 // Version: 1.0
 /// header file in project
-/// having problems with the + operator
+/// having problems with the fixed the + operator for the postive numbers adding
 /// finished the setters and getters and paramterized constructors
-/// commit in 26/10/18 9:00AM by HANAFY
+/// commit in 26/10/18 12PM  by HANAFY
+/// v1.1
+
 
 
 
@@ -25,8 +27,9 @@ class bigINT
         bigINT();
         bigINT(string mstring);
         bigINT(long long x);
+        bigINT(double x);
 
-        bigINT(const bigINT& other);
+
         bigINT& operator=(const bigINT& other);
         void setBig_INT(string mstring);
         void setBig_INT(long long  mstring);
@@ -37,8 +40,8 @@ class bigINT
         string getBig_INT();
         friend ostream&operator <<(ostream &out ,const bigINT &obj);
     protected:
-    private:
 
+    private:
         string mstring ;
 };
 

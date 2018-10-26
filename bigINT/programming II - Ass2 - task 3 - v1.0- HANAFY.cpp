@@ -7,30 +7,27 @@
 // Date:    26 October 2018
 // Version: 1.0
 /// main file in project
-/// having problems with the + operator
+/// having problems with the fixed the + operator for the postive numbers adding
 /// finished the setters and getters and paramterized constructors
-/// commit in 26/10/18 9:00AM  by HANAFY
+/// commit in 26/10/18 12PM  by HANAFY
+/// v1.1
 
 
 #include <iostream>
 #include "bigINT.h"
 using namespace  std;
-
+#define lp(i,s,e) for(int i = s ; i<e ; ++i)
 
 int main(){
 
     string pSTRING_1 , pSTRING_2;
     cin>>pSTRING_1;
+
     bigINT num0(pSTRING_1);
-    cout<<num0.getBig_INT()<<endl;
+
     long long pLL1;
     cin>>pLL1;
     bigINT num1(pLL1);
-    cout<<num1.getBig_INT()<<endl;
-//    num0+num1;
-//    num0 = num0+num1;
-    cout<<num0+num1<<endl;          /// i have a problem here with  the + operator
-    cout<<num0.getBig_INT()<<endl;
-//    cout<<num0+num1<<endl;
 
+    cout<<num0+num1<<endl;
 }
