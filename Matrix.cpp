@@ -1,9 +1,30 @@
-/*
+// Course:  CS213 - Programming II  - 2018
+// Title:   Assignment II - Task 1 - Problem 0
+// Program: CS213-2018-A1-T1-P0
+// Purpose: Apply basic arithmetic operations on Matrices
+// Author1: Mostafa Omar Mahmoud - 20170292
+// Date:    25 October 2018
+// Version: 1.0
+
+/**
  * File: Matrix.cpp
  *
  * This file has the implementation of the methods in Matrix.h
  * Applies basic arithmetic operations on matrices
  */
+
+
+/// Hanafy's commit in 26/10/18
+/// done with
+    ///+= operator      for 2 matrices
+    ///-= operator      for 2 matrices
+    ///+= operator      matrix and scalar
+    ///-= operator      matrix and scalar
+    /// ++ and --       both postfix and prefix
+    /// isSquare isIdentity isSymmetric and transpose functions
+
+/// v1.1
+
 
 #include <cassert>
 #include "Matrix.h"
@@ -104,7 +125,158 @@ istream& operator>> (istream& in, Matrix &mat)
 	}
 	return in;
 }
+/**********************************************************/
+ /// HANAFY'S PROTOTYPES
 
+Matrix Matrix :: operator+= ( Matrix &mat2){      /// mat1 changes & return new matrix with the sum
+                                                /// done
+
+      ///can do this trick   *this = *this + mat2;
+        int r = this->row;
+        int c = this->col;
+
+        if(r != mat2.row || c!= mat2.col){
+            cout<<"can't add matrices with different sizes\n";
+            return *this;
+        }
+        int **arr = 0;
+        if(this->data != NULL)
+             arr= this->data;             /// creating a double pointer to the data array in the matrix we add to it
+        for (int i = 0; i <r ; ++i) {
+            for (int j = 0; j <c ; ++j)
+                arr[i][j] += mat2.data[i][j] ;
+
+
+
+        }
+    return  *this;
+}
+Matrix Matrix :: operator-= ( Matrix &mat2){      /// mat1 changes & return new matrix with the subtract
+                                                /// done
+        int r = this->row;
+        int c = this->col;
+
+        if(r != mat2.row || c!= mat2.col){
+            cout<<"can't add matrices with different sizes\n";
+            return *this;
+        }
+        int **arr = 0;
+        if(this->data != NULL)
+             arr= this->data;             /// creating a double pointer to the data array in the matrix we add to it
+        for (int i = 0; i <r ; ++i) {
+            for (int j = 0; j <c ; ++j)
+                arr[i][j] -= mat2.data[i][j] ;
+
+
+
+        }
+    return  *this;
+}
+Matrix Matrix :: operator +=(int x){
+    *this = *this +x;
+    return *this;
+}
+Matrix Matrix :: operator -=(int x){
+    *this = *this -x;
+    return *this;
+}
+Matrix& Matrix :: operator ++(){            ///prefix increment
+    *this = *this +1;
+    return *this;
+}
+Matrix Matrix :: operator ++(int){          /// postfix increment
+    Matrix ret = *this;
+    ++(*this);
+    return ret;
+}
+Matrix& Matrix :: operator --(){            ///prefix decrement
+    *this = *this -1;
+    return *this;
+}
+Matrix Matrix :: operator --(int){          /// postfix decrement
+    Matrix ret = *this;
+    --(*this);
+    return ret;
+}
+bool Matrix :: isSquare(){
+    return this->row == this->col;          /// if matrix row == matrix column then true otherwise false
+
+}
+bool Matrix ::  isSymetric (){
+    if(!isSquare()) return false;
+     /**            check every cell and its corresponding except the main diagonal
+      *             for every i and j= i +1 because no meaning for j = i
+      *             (0,0)   (0,1)   (0,2)   (0,3)
+      *             (1,0)   (1,1)   (1,2)   (1,3)
+      *             (2,0)   (2,1)   (2,2)   (2,3)
+      *             (3,0)   (3,1)   (3,2)   (3,3)
+      *
+      *
+      */
+    int **data = 0;
+    int row = this->row;
+    int col = this->col;
+    if(this->data != 0) data = this->data;
+    else                return false;
+    for (int i = 0; i <row ; ++i) {
+        for (int j = i+1; j < col; ++j) {
+            if (data[i][j] != data[j][i])
+                return false;
+        }
+    }
+
+    return true;
+
+}
+bool Matrix :: isIdentity (){
+    if(!isSquare())
+        return false ;
+     /**             check every cell and its corresponding except the main diagonal
+      *             for every i and j= i +1 because no meaning for j = i
+      *             (0,0)   (0,1)   (0,2)   (0,3)
+      *             (1,0)   (1,1)   (1,2)   (1,3)
+      *             (2,0)   (2,1)   (2,2)   (2,3)
+      *             (3,0)   (3,1)   (3,2)   (3,3)
+      *
+      *
+      */
+
+    int **data = 0;
+    int row = this->row;
+    int col = this->col;
+    if(this->data != 0) data = this->data;
+    else                return false;
+    for(int i = 1 ; i <row ; ++i){
+        if(data[i][i] != data[i-1][i-1] || data[i][i]!= 1)
+            return false;
+    }
+    for (int i = 0; i <row ; ++i) {
+        for (int j = i+1; j < col; ++j ) {
+            if (data[i][j] != data[j][i]|| data[i][j]!= 0)
+                return false;
+        }
+    }
+
+    return true;
+}
+Matrix Matrix :: transpose(){
+    Matrix retmat (this->col , this->row);
+
+    for (int i = 0; i <this->row ; ++i) {
+        for (int j = 0; j < this->col; ++j) {
+            retmat.data[j][i]= this->data[i][j];
+        }
+    }
+    *this = retmat;         /// saving the new matrix in this
+    return *this; // i don't know how the matrix change in memory size if i returned transposed matrix 3x4 to 4x3
+}
+
+
+
+
+
+
+/***********************************************************/
 Matrix Matrix::operator+(Matrix mat)
 {
 	assert(this->row == mat.row && this->col == mat.col);

@@ -22,6 +22,17 @@
  * Copy constructor: When const can't use getCell, when not const and using getCell cant do mat3 = mat1 + mat2
  * 	How am I using mat private data members here lol. Also must use const in cout << mat1 + mat2
  */
+/// Hanafy's commit in 26/10/18
+/// done with
+    ///+= operator      for 2 matrices
+    ///-= operator      for 2 matrices
+    ///+= operator      matrix and scalar
+    ///-= operator      matrix and scalar
+    /// ++ and --       both postfix and prefix
+    /// isSquare isIdentity isSymmetric and transpose functions
+
+/// v1.1
+
 
 #ifndef _MATRIX_H
 #define _MATRIX_H
@@ -42,6 +53,7 @@ private:
 	int** data;
 	int row, col;
 public:
+
 	/*
 	 * Constructor
 	 * --------------------------
@@ -99,6 +111,21 @@ public:
 	 * ------------------------------------
 	 *	Aborts if (mat1.row != mat2.row || mat1.col != mat2.col)
 	 */
+	  /// HANAFY'S PROTOTYPES
+    Matrix operator+= ( Matrix &mat2);          /// mat1 changes & return new matrix with the sum
+    Matrix operator-= ( Matrix &mat2);          /// mat1 changes & return new matrix with the subtract
+    Matrix operator += (int x);                 /// add scalar to this->data
+    Matrix operator -= (int x);                 /// subtract scalar from this->data
+    Matrix operator++(int);                     /// postfix a++; returns nothing just increment data by one
+    Matrix & operator++();                      /// prefix ++a ; with dummy int
+    Matrix operator--(int);                     /// postfix a--; returns nothing just decrement data by one
+    Matrix & operator--();                      /// prefix --a ; with dummy int
+    bool isSquare();                            ///returns true if the matrix is square
+    bool isSymetric ();                         /// True if square and symmetric
+    bool isIdentity ();                         /// True if square and identity
+    Matrix transpose();                         ///TRANSPOSE MATRIX
+
+    /***********************************************************************/
 	Matrix operator+(Matrix mat);
 
 	/*
