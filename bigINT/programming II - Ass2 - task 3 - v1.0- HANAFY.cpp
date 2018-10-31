@@ -12,22 +12,35 @@
 /// commit in 26/10/18 12PM  by HANAFY
 /// v1.1
 
+/***********************/
+///v1.2
+/// fixed the subtraction function
+///-ve  -  -ve no
+/// -ve - +ve yes
+///+ -      no
+/// -  -        no
+/// +  +        yes
+/// + operator is done with all cases
+/// commited by HANAFY
+
 
 #include <iostream>
 #include "bigINT.h"
 using namespace  std;
 #define lp(i,s,e) for(int i = s ; i<e ; ++i)
+string add_function(bigINT first , bigINT second) ;
+
 
 int main(){
-
     string pSTRING_1 , pSTRING_2;
-    cin>>pSTRING_1;
+    cin>>pSTRING_1 ;
 
     bigINT num0(pSTRING_1);
-
     long long pLL1;
     cin>>pLL1;
     bigINT num1(pLL1);
-
+//    cout<<num0<<" "<<num1<<endl;
     cout<<num0+num1<<endl;
+//    cout<<add_function(pSTRING_1 , pSTRING_2)<<endl;
+//    cout<<num0+num1<<endl;
 }

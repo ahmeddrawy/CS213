@@ -30,19 +30,21 @@ class bigINT
         bigINT(double x);
 
 
-        bigINT& operator=(const bigINT& other);
+//        bigINT& operator=(const bigINT& other);
         void setBig_INT(string mstring);
         void setBig_INT(long long  mstring);
         void setBig_INT(int mstring);
         void setBig_INT(double mstring);
-        bigINT operator+(bigINT obj);
+        bigINT operator+(bigINT obj);           /// operator overloading
         bigINT operator-(bigINT obj);
-        string getBig_INT();
+//        string getBig_INT();
+        friend string add_function(bigINT , bigINT);
+         bigINT Subtraction(bigINT , bigINT);
         friend ostream&operator <<(ostream &out ,const bigINT &obj);
     protected:
 
     private:
-        string mstring ;
+        string mstring ; bool sign ; /// sign 1 if positive  0 otherwise
 };
 
 #endif // BIGINT_H
