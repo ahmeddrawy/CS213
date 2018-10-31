@@ -4,6 +4,7 @@
 // Purpose: Apply basic arithmetic operations on bigINT class
 // Author1: Mostafa Omar Mahmoud - 20170292
 // Author2: Ahmed Mohamed Hanafy - 20170357
+// Author3 : Omar Hussein         - 2017039_
 // Date:    26 October 2018
 // Version: 1.0
 /// main file in project
@@ -39,8 +40,7 @@ int main(){
     long long pLL1;
     cin>>pLL1;
     bigINT num1(pLL1);
-//    cout<<num0<<" "<<num1<<endl;
+
     cout<<num0+num1<<endl;
-//    cout<<add_function(pSTRING_1 , pSTRING_2)<<endl;
-//    cout<<num0+num1<<endl;
+
 }

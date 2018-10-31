@@ -86,9 +86,7 @@ void bigINT::setBig_INT(long long mstring){
 void bigINT::setBig_INT(int mstring){
     this->mstring = mstring;
 }
-void bigINT::setBig_INT(double mstring){
-    this->mstring = mstring;
-}
+
 bigINT bigINT ::Subtraction(bigINT first,bigINT second) /// returns string result of a - b including sign if negative
 {
                                 /// edited by hanafy because returning string was causing initializing the

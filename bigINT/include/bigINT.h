@@ -26,8 +26,9 @@ class bigINT
     public:
         bigINT();
         bigINT(string mstring);
-        bigINT(long long x);
-        bigINT(double x);
+        bigINT(long long );
+        bigINT(int );
+
 
 
 //        bigINT& operator=(const bigINT& other);
