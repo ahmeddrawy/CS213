@@ -7,3 +7,27 @@ bigINT/main.cpp
 bigINT/template header.h
 *.exe
 cs213/main.cpp
+ConsoleApplication1/ConsoleApplication1.cpp
+ConsoleApplication1/ConsoleApplication1.sln
+*.filters
+*.tlog
+ConsoleApplication1/stdafx.cpp
+*.idb
+*.obj
+*.pdb
+*.pch
+*.log
+*.ilk
+*.user
+ConsoleApplication1/targetver.h
+ConsoleApplication1/stdafx.h
+*.vcxproj
+*.ipch
+*.db
+ConsoleApplication1/.vs/ConsoleApplication1/v15/.suo
+*.sln
+assignment_2_v1.2_vs/.vs/assignment_2_v1.2_vs/v15/.suo
+assignment_2_v1.2_vs/assignment_2_v1.2_vs.cpp
+assignment_2_v1.2_vs/stdafx.cpp
+assignment_2_v1.2_vs/stdafx.h
+assignment_2_v1.2_vs/targetver.h
