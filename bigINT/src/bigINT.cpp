@@ -22,6 +22,8 @@ template <typename T>
 string convert_decimal(T  x){ /// generic function to make it able use this function with whatever the data type
                             /// we need here only the long long and int
     string ret;
+    if (!x)
+        ret += '0';
     while(x){
         char temp = x%10 +'0';
         ret += temp;
@@ -38,12 +40,13 @@ string convert_decimal(T  x){ /// generic function to make it able use this func
 bigINT ::bigINT(string mstring){       /// parametrized constructor initializing the string to passed string
                                             /// if positive take all the string else take substring from 1 to n
     if(mstring[0]>='0'&&mstring[0]<='9')
+    {
         this->mstring = mstring;
-    else {
-        sign = mstring[0]!='-';
-        this->mstring = mstring.substr(1);
-
     }
+    else {
+        this->mstring = mstring.substr(1);
+    }
+    this->sign = (mstring[0] != '-');
 
 }
 bigINT::bigINT(long long x){        /// constructor to take long long and assign it to the string in BigINT
@@ -87,7 +90,69 @@ void bigINT::setBig_INT(int mstring){
     this->mstring = mstring;
 }
 
-bigINT bigINT ::Subtraction(bigINT first,bigINT second) /// returns string result of a - b including sign if negative
+//bigINT bigINT ::Subtraction(bigINT first,bigINT second) /// returns string result of a - b including sign if negative
+//{
+//                                /// edited by hanafy because returning string was causing initializing the
+//                                /// sign of the new bigINT with zero which is negative
+//    bool neg = 0;
+//    string ans;
+//    string a = first.mstring;
+//    string b = second.mstring ;
+//    if ((a.size() < b.size()) || (a.size() == b.size() && a < b))
+//    {
+//        neg = 1;
+//        swap(a, b);         /// making sure that A is the larger than B
+//    }
+//
+//    reverse(a.begin(), a.end());
+//    reverse(b.begin(), b.end());
+//    vector<int> num1(a.size()), num2(b.size());
+//    for (int i = 0; i <(int)( a.size()); ++i)
+//        num1[i] = a[i] - '0';
+//    for (int i = 0; i <(int)( b.size()); ++i)
+//        num2[i] = b[i] - '0';
+//
+//    for (int i = 0; i < (int)( b.size()); ++i)
+//    {
+//        if (num1[i] >= num2[i])
+//            ans += (num1[i] - num2[i] + '0');
+//        else
+//        {
+//            for (int j = i + 1; j <(int)( b.size()); ++j)
+//            {
+//                num1[j-1] += 10;
+//                if (num1[j] > 0)
+//                {
+//                    num1[j]--;
+//                    break;
+//                }
+//            }
+//            ans += (num1[i] - num2[i] + '0');
+//        }
+//    }
+////    if (neg)
+////        ans += '-';
+//    reverse(ans.begin(), ans.end());
+//    bool allZeros = true;
+//    for (int i = 0; i < (int)(ans.size()); ++i) /// edited by hanafy looping from zero because the sign is assigned out of the string
+//
+//    {
+//        if (ans[i] != '0')
+//        {
+//            allZeros = false;
+//            break;
+//        }
+//        else
+//            ans.erase(i,1);           /// we have problem with the erase it gives bad alloc
+//                                        /// fixed by giving it len of the erasing
+//    }
+//    bigINT ret(ans );
+//    ret.sign = !neg;
+//    return ret;
+//}
+
+
+string Subtraction(bigINT first,bigINT second) /// returns string result of a - b including sign if negative
 {
                                 /// edited by hanafy because returning string was causing initializing the
                                 /// sign of the new bigINT with zero which is negative
@@ -108,31 +173,33 @@ bigINT bigINT ::Subtraction(bigINT first,bigINT second) /// returns string resul
         num1[i] = a[i] - '0';
     for (int i = 0; i <(int)( b.size()); ++i)
         num2[i] = b[i] - '0';
-
-    for (int i = 0; i < (int)( b.size()); ++i)
+    int i;
+    for (i = 0; i < (int)( b.size()); ++i)
     {
         if (num1[i] >= num2[i])
             ans += (num1[i] - num2[i] + '0');
         else
         {
-            for (int j = i + 1; j <(int)( b.size()); ++j)
-            {
-                num1[j-1] += 10;
-                if (num1[j] > 0)
-                {
-                    num1[j]--;
-                    break;
-                }
-            }
-            ans += (num1[i] - num2[i] + '0');
+            ans += (num1[i] - num2[i] + '0' + 10);
+            num1[i+1]--;
+            cout << "digit = " <<  ans.back() << endl;
         }
     }
-//    if (neg)
-//        ans += '-';
+    for (; i < a.size(); ++i)
+    {
+        if (num1[i] < 0)
+        {
+            ans += (10 + num1[i] + '0');
+            num1[i+1]--;
+        }
+        else
+            ans += (num1[i] + '0');
+    }
+    if (neg)
+        ans += '-';
     reverse(ans.begin(), ans.end());
     bool allZeros = true;
-    for (int i = 0; i < (int)(ans.size()); ++i) /// edited by hanafy looping from zero because the sign is assigned out of the string
-
+    for (int i = 0; i < (int)(ans.size()) && ans.size() > 1; ++i) /// edited by hanafy looping from zero because the sign is assigned out of the string
     {
         if (ans[i] != '0')
         {
@@ -141,12 +208,13 @@ bigINT bigINT ::Subtraction(bigINT first,bigINT second) /// returns string resul
         }
         else
             ans.erase(i,1);           /// we have problem with the erase it gives bad alloc
-                                        /// fixed by giving it len of the erasing
+                                    /// fixed by giving it len of the erasing
     }
-    bigINT ret(ans );
-    ret.sign = !neg;
-    return ret;
+    return ans;
 }
+
+
+
 
 bigINT bigINT :: operator+(bigINT obj){ ///positive adding
     if(this->sign == obj.sign){
@@ -158,14 +226,13 @@ bigINT bigINT :: operator+(bigINT obj){ ///positive adding
     }
     else {
             cout<<"subtracting here\n";
-//        bigINT res;
+        string resTemp;
         if (this->sign == 1)
-            return Subtraction(*this, obj); /// return the subtraction final answer with the sign
+            resTemp = Subtraction(*this, obj); /// return the subtraction final answer with the sign
         else
-            return Subtraction(obj, *this);
-
-
-//        return res;
+            resTemp = Subtraction(obj, *this);
+        bigINT res(resTemp);
+        return res;
     }
 }
 
