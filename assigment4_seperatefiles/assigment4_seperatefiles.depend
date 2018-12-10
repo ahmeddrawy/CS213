@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1544404743 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\aminoacid.cpp
+
+1544405510 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\codonstable.cpp
+	"CodonsTable.h"
+	<fstream>
+
+1544405510 e:\second year\oop\cs213\assigment4_seperatefiles\include\codonstable.h
+
+1544404765 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\dna.cpp
+	"DNA.h"
+
+1544404884 source:e:\second year\oop\cs213\assigment4_seperatefiles\main.cpp
+	<iostream>
+	"Sequence.h"
+	"DNA.h"
+	"RNA.h"
+	"Protein.h"
+	"CodonsTable.h"
+
+1544404659 e:\second year\oop\cs213\assigment4_seperatefiles\include\sequence.h
+	<bits/stdc++.h>
+
+1544405634 e:\second year\oop\cs213\assigment4_seperatefiles\include\dna.h
+	"Sequence.h"
+	"RNA.h"
+
+1544404680 e:\second year\oop\cs213\assigment4_seperatefiles\include\rna.h
+	"Sequence.h"
+	"CodonsTable.h"
+	"Protein.h"
+	"AminoAcid.h"
+	<bits/stdc++.h>
+
+1544404874 e:\second year\oop\cs213\assigment4_seperatefiles\include\protein.h
+	"CodonsTable.h"
+	"DNA.h"
+
+1544404693 e:\second year\oop\cs213\assigment4_seperatefiles\include\aminoacid.h
+	"Sequence.h"
+	<bits/stdc++.h>
+
+1544287348 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\rna.cpp
+
+1544293667 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\sequence.cpp
+	"Sequence.h"
+	<cstring>
+	<bits/stdc++.h>
+
