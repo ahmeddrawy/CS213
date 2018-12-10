@@ -39,7 +39,7 @@ Sequence :: Sequence (Sequence & rhs){
     len = rhs.len;
 }
 ///template<class T>
-Sequence& Sequence<T>:: operator= (Sequence& rhs)
+Sequence& Sequence:: operator= (Sequence& rhs)
 {
     if (seq != 0)
     {

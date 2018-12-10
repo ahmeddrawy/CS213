@@ -37,7 +37,7 @@ using namespace std;
     }
     // function to convert the RNA sequence into protein sequence
     // using the codonsTable object
-    Protein RNA::ConvertToProtein(CodonsTable & table)
+    /**Protein RNA::ConvertToProtein(CodonsTable & table)
 	{
 ///        if (len%3 != 0)
 ///            cout<< "NotMod3";   /// we have problem with the return value here
@@ -65,10 +65,12 @@ using namespace std;
 //				}
 //			}
 		}
-		Protein retProtein(AA); /// Implement constructor
+		Protein retProtein(AA); /// Implement constructor i commented this - hanafy
+                                /// undefined referenve to protein
 		delete [] AA;
 		return retProtein;
 	}
+	*/
     // function to convert the RNA sequence back to DNA
     DNA RNA::ConvertToDNA()            /// changed from char to DNA by hanafy
     {
@@ -80,10 +82,13 @@ using namespace std;
                 dnaS[i] = 'T';
             }
         }
-        DNA retDNA(dnaS);
+        DNA retDNA(dnaS ,promoter);          /// we have a problem here with the dna constructor
+
+                                            /// i passed a type because each dna has a type
         ///DNA res(dnaS,promoter,0,len);
         ///return res.getComplementaryStrand();
         delete [] dnaS;
         ///return res.getComplementaryStrand();
-        return retDNA.BuildComplementaryStrand();
+       /// return retDNA.BuildComplementaryStrand(); /// why returning here the complementry strand ???
+        return retDNA;
     }

@@ -7,7 +7,7 @@
 
 1544405510 e:\second year\oop\cs213\assigment4_seperatefiles\include\codonstable.h
 
-1544404765 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\dna.cpp
+1544408321 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\dna.cpp
 	"DNA.h"
 
 1544404884 source:e:\second year\oop\cs213\assigment4_seperatefiles\main.cpp
@@ -40,9 +40,11 @@
 	"Sequence.h"
 	<bits/stdc++.h>
 
-1544287348 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\rna.cpp
+1544407636 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\rna.cpp
+	"RNA.h"
+	<bits/stdc++.h>
 
-1544293667 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\sequence.cpp
+1544407425 source:e:\second year\oop\cs213\assigment4_seperatefiles\src\sequence.cpp
 	"Sequence.h"
 	<cstring>
 	<bits/stdc++.h>
